@@ -3,6 +3,7 @@
 
 t_fill *ft_read_f(int ac, char **av)
 {
+	printf("%s\n", "111111");
 	int fd;	
 	char *buf;
 	t_fill *arr;
