@@ -1,33 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_read_f.c                                        :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vibondar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/18 15:18:55 by vibondar          #+#    #+#             */
-/*   Updated: 2017/11/18 15:19:07 by vibondar         ###   ########.fr       */
+/*   Created: 2017/11/08 18:34:40 by vibondar          #+#    #+#             */
+/*   Updated: 2017/11/08 18:34:42 by vibondar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-t_fill	*ft_read_f(int ac, char **av, int *len)
+void	ft_lstiter(t_list *lst, void (*f)(t_list *elem))
 {
-	int		fd;
-	char	*buf;
-	char	**file;
-	t_fill	*arr;
+	t_list	*tmp;
 
-	ac = 1;
-	buf = ft_strnew(600);
-	fd = open(av[1], O_RDONLY);
-	read(fd, buf, 600);
-	*len = num_fig(buf);
-	arr = (t_fill*)malloc(sizeof(t_fill) * *len);
-	file = ft_strsplit(buf, '\n');
-	arr = ft_fillstr(file, arr, -1, -1);
-	close(fd);
-	free(buf);
-	return (arr);
+	tmp = lst;
+	while (tmp)
+	{
+		f(tmp);
+		tmp = tmp->next;
+	}
 }

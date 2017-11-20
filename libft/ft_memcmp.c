@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_read_f.c                                        :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vibondar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/18 15:18:55 by vibondar          #+#    #+#             */
-/*   Updated: 2017/11/18 15:19:07 by vibondar         ###   ########.fr       */
+/*   Created: 2017/10/30 17:28:35 by vibondar          #+#    #+#             */
+/*   Updated: 2017/10/30 17:28:36 by vibondar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-t_fill	*ft_read_f(int ac, char **av, int *len)
+int		ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	int		fd;
-	char	*buf;
-	char	**file;
-	t_fill	*arr;
+	unsigned char	*str1;
+	unsigned char	*str2;
+	int				i;
 
-	ac = 1;
-	buf = ft_strnew(600);
-	fd = open(av[1], O_RDONLY);
-	read(fd, buf, 600);
-	*len = num_fig(buf);
-	arr = (t_fill*)malloc(sizeof(t_fill) * *len);
-	file = ft_strsplit(buf, '\n');
-	arr = ft_fillstr(file, arr, -1, -1);
-	close(fd);
-	free(buf);
-	return (arr);
+	i = 0;
+	str1 = (unsigned char *)s1;
+	str2 = (unsigned char *)s2;
+	while (n--)
+	{
+		if (str1[i] != str2[i])
+			return (str1[i] - str2[i]);
+		i++;
+	}
+	return (0);
 }

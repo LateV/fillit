@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_read_f.c                                        :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vibondar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/18 15:18:55 by vibondar          #+#    #+#             */
-/*   Updated: 2017/11/18 15:19:07 by vibondar         ###   ########.fr       */
+/*   Created: 2017/10/27 13:56:20 by vibondar          #+#    #+#             */
+/*   Updated: 2017/10/27 13:56:24 by vibondar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-t_fill	*ft_read_f(int ac, char **av, int *len)
+char	*ft_strcat(char *s1, const char *s2)
 {
-	int		fd;
-	char	*buf;
-	char	**file;
-	t_fill	*arr;
+	int i;
+	int j;
 
-	ac = 1;
-	buf = ft_strnew(600);
-	fd = open(av[1], O_RDONLY);
-	read(fd, buf, 600);
-	*len = num_fig(buf);
-	arr = (t_fill*)malloc(sizeof(t_fill) * *len);
-	file = ft_strsplit(buf, '\n');
-	arr = ft_fillstr(file, arr, -1, -1);
-	close(fd);
-	free(buf);
-	return (arr);
+	i = 0;
+	while (s1[i] != '\0')
+		i++;
+	j = 0;
+	while (s2[j] != '\0')
+	{
+		s1[i + j] = s2[j];
+		j++;
+	}
+	s1[i + j] = '\0';
+	return (s1);
 }

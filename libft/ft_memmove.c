@@ -1,27 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   valid_ch.c                                         :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vibondar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/18 15:24:06 by vibondar          #+#    #+#             */
-/*   Updated: 2017/11/18 15:24:09 by vibondar         ###   ########.fr       */
+/*   Created: 2017/10/26 17:30:01 by vibondar          #+#    #+#             */
+/*   Updated: 2017/10/26 17:30:02 by vibondar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-int	valid_ch(char *buf)
+static int	check(unsigned char *dst, const unsigned char *src)
 {
-	int i;
+	if (src < dst)
+		return (1);
+	else
+		return (0);
+}
+
+void		*ft_memmove(void *dst, const void *src, size_t len)
+{
+	size_t				i;
+	unsigned char		*d;
+	const unsigned char	*s;
 
 	i = 0;
-	while (buf[i] != '\0')
+	d = dst;
+	s = src;
+	while (i < len)
 	{
-		if (buf[i] != '.' && buf[i] != '#' && buf[i] != '\n')
-			return (1);
+		if (check(d, s) == 1)
+			d[len - i - 1] = s[len - i - 1];
+		else
+			d[i] = s[i];
 		i++;
 	}
-	return (0);
+	return ((void *)d);
 }

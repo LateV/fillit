@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_read_f.c                                        :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vibondar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/18 15:18:55 by vibondar          #+#    #+#             */
-/*   Updated: 2017/11/18 15:19:07 by vibondar         ###   ########.fr       */
+/*   Created: 2017/10/27 14:30:47 by vibondar          #+#    #+#             */
+/*   Updated: 2017/10/27 14:30:48 by vibondar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-t_fill	*ft_read_f(int ac, char **av, int *len)
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	int		fd;
-	char	*buf;
-	char	**file;
-	t_fill	*arr;
+	int		a;
+	size_t	d_len;
+	size_t	s_len;
 
-	ac = 1;
-	buf = ft_strnew(600);
-	fd = open(av[1], O_RDONLY);
-	read(fd, buf, 600);
-	*len = num_fig(buf);
-	arr = (t_fill*)malloc(sizeof(t_fill) * *len);
-	file = ft_strsplit(buf, '\n');
-	arr = ft_fillstr(file, arr, -1, -1);
-	close(fd);
-	free(buf);
-	return (arr);
+	d_len = ft_strlen(dst);
+	s_len = ft_strlen(src);
+	a = size - d_len;
+	if (a <= 0)
+		return (s_len + size);
+	else
+	{
+		ft_strncat(dst, src, size - d_len - 1);
+		return (s_len + d_len);
+	}
 }

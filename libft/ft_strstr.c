@@ -1,33 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_read_f.c                                        :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vibondar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/18 15:18:55 by vibondar          #+#    #+#             */
-/*   Updated: 2017/11/18 15:19:07 by vibondar         ###   ########.fr       */
+/*   Created: 2017/10/30 17:41:16 by vibondar          #+#    #+#             */
+/*   Updated: 2017/10/30 17:41:18 by vibondar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-t_fill	*ft_read_f(int ac, char **av, int *len)
+char	*ft_strstr(const char *haystack, const char *needle)
 {
-	int		fd;
-	char	*buf;
-	char	**file;
-	t_fill	*arr;
+	int i;
+	int j;
 
-	ac = 1;
-	buf = ft_strnew(600);
-	fd = open(av[1], O_RDONLY);
-	read(fd, buf, 600);
-	*len = num_fig(buf);
-	arr = (t_fill*)malloc(sizeof(t_fill) * *len);
-	file = ft_strsplit(buf, '\n');
-	arr = ft_fillstr(file, arr, -1, -1);
-	close(fd);
-	free(buf);
-	return (arr);
+	i = 0;
+	j = 0;
+	if (needle[j] == '\0')
+		return ((char *)&haystack[i - j]);
+	while (haystack[i])
+	{
+		if (haystack[i] == needle[j])
+		{
+			if (needle[j + 1] == '\0')
+				return ((char *)&haystack[i - j]);
+			j++;
+		}
+		else
+		{
+			i = i - j;
+			j = 0;
+		}
+		i++;
+	}
+	return (0);
 }

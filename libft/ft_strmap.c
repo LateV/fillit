@@ -1,33 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_read_f.c                                        :+:      :+:    :+:   */
+/*   ft_strmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vibondar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/18 15:18:55 by vibondar          #+#    #+#             */
-/*   Updated: 2017/11/18 15:19:07 by vibondar         ###   ########.fr       */
+/*   Created: 2017/11/02 13:28:14 by vibondar          #+#    #+#             */
+/*   Updated: 2017/11/02 13:28:16 by vibondar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-t_fill	*ft_read_f(int ac, char **av, int *len)
+char	*ft_strmap(char const *s, char (*f)(char))
 {
-	int		fd;
-	char	*buf;
-	char	**file;
-	t_fill	*arr;
+	unsigned int	i;
+	char			*r;
 
-	ac = 1;
-	buf = ft_strnew(600);
-	fd = open(av[1], O_RDONLY);
-	read(fd, buf, 600);
-	*len = num_fig(buf);
-	arr = (t_fill*)malloc(sizeof(t_fill) * *len);
-	file = ft_strsplit(buf, '\n');
-	arr = ft_fillstr(file, arr, -1, -1);
-	close(fd);
-	free(buf);
-	return (arr);
+	i = 0;
+	if (s && f)
+	{
+		r = (char*)ft_memalloc(sizeof(char) * (ft_strlen(s) + 1));
+		if (r)
+		{
+			while (s[i] != '\0')
+			{
+				r[i] = f(s[i]);
+				i++;
+			}
+			r[i] = '\0';
+			return (r);
+		}
+	}
+	return (NULL);
 }
